@@ -51,40 +51,59 @@ public class MenuService {
         // 조회된 메뉴를 반환
     }
 
+    // 메뉴 추가 삽입하는 메소드
     public boolean registMenu(MenuDTO menu) {
 
         SqlSession sqlSession = getSqlSession();
+
         int result = menuDAO.insertMenu(sqlSession, menu);
+        // menuDAO의 insertMenu 메소드를 호출하여 메뉴를 삽입하고, 그 결과를 result 에 저장
+
         if (result > 0) {
+            // 삽입 결과가 성공적이면(즉, result가 0보다 크면) 트랜잭션을 커밋
             sqlSession.commit();
         } else {
+            // 삽입 결과가 실패하면(즉, result 가 0 이하이면) 트랜잭션을 롤백
             sqlSession.rollback();
         }
+
         sqlSession.close();
 
+        // 실행 결과가 성공적이면 true 를, 실패하면 false 를 반환
         return result > 0 ? true : false;
     }
 
+    // 특정 코드를 입력받아 해당 메뉴의 값을 수정하는 메소드
     public boolean updateMenuByCode(MenuDTO menu) {
+
         SqlSession sqlSession = getSqlSession();
+
         int result = menuDAO.updateMenuByCode(sqlSession, menu);
+
         if (result > 0) {
             sqlSession.commit();
         } else {
             sqlSession.rollback();
         }
+
         sqlSession.close();
+
         return result > 0 ? true : false;
     }
 
+    // 특정 코드를 입력받아 해당 메뉴를 삭제하는 메소드
     public boolean deleteMenuByCode(int code) {
+
         SqlSession sqlSession = getSqlSession();
+
         int result = menuDAO.deleteMenuByCode(sqlSession, code);
+
         if (result > 0) {
             sqlSession.commit();
         } else {
             sqlSession.rollback();
         }
+
         sqlSession.close();
 
         return result > 0 ? true : false;
