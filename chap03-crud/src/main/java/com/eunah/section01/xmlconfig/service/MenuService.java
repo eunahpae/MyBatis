@@ -54,15 +54,39 @@ public class MenuService {
     public boolean registMenu(MenuDTO menu) {
 
         SqlSession sqlSession = getSqlSession();
-
         int result = menuDAO.insertMenu(sqlSession, menu);
-
         if (result > 0) {
             sqlSession.commit();
         } else {
             sqlSession.rollback();
         }
         sqlSession.close();
+
+        return result > 0 ? true : false;
+    }
+
+    public boolean updateMenuByCode(MenuDTO menu) {
+        SqlSession sqlSession = getSqlSession();
+        int result = menuDAO.updateMenuByCode(sqlSession, menu);
+        if (result > 0) {
+            sqlSession.commit();
+        } else {
+            sqlSession.rollback();
+        }
+        sqlSession.close();
+        return result > 0 ? true : false;
+    }
+
+    public boolean deleteMenuByCode(int code) {
+        SqlSession sqlSession = getSqlSession();
+        int result = menuDAO.deleteMenuByCode(sqlSession, code);
+        if (result > 0) {
+            sqlSession.commit();
+        } else {
+            sqlSession.rollback();
+        }
+        sqlSession.close();
+
         return result > 0 ? true : false;
     }
 }

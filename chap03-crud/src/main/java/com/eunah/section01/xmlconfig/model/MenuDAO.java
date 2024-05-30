@@ -24,4 +24,12 @@ public class MenuDAO {
     public int insertMenu(SqlSession sqlSession, MenuDTO menu) {
         return sqlSession.insert("MenuMapper.insertMenu", menu);
     }
+
+    public int deleteMenuByCode(SqlSession sqlSession, int code) {
+        return sqlSession.delete("MenuMapper.deleteMenuByCode", code);
+    }
+
+    public int updateMenuByCode(SqlSession sqlSession, MenuDTO menu) {
+        return sqlSession.update("MenuMapper.updateMenuByCode", menu);
+    }
 }

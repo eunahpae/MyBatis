@@ -13,22 +13,22 @@
 
     <select id="selectAllMenu" resultMap="menuResultMap">
         SELECT
-            MENU_CODE,
-            MENU_NAME,
-            MENU_PRICE,
-            CATEGORY_CODE,
-            ORDERABLE_STATUS
+        MENU_CODE,
+        MENU_NAME,
+        MENU_PRICE,
+        CATEGORY_CODE,
+        ORDERABLE_STATUS
         FROM TBL_MENU
         WHERE ORDERABLE_STATUS = 'Y'
     </select>
 
     <select id="selectMenuByCode" resultMap="menuResultMap">
         SELECT
-            MENU_CODE,
-            MENU_NAME,
-            MENU_PRICE,
-            CATEGORY_CODE,
-            ORDERABLE_STATUS
+        MENU_CODE,
+        MENU_NAME,
+        MENU_PRICE,
+        CATEGORY_CODE,
+        ORDERABLE_STATUS
         FROM TBL_MENU
         WHERE ORDERABLE_STATUS = 'Y'
         AND MENU_CODE = #{ code }
@@ -47,4 +47,21 @@
             'Y'
         )
     </insert>
+
+    <delete id="deleteMenuByCode" parameterType="int">
+        DELETE FROM TBL_MENU
+        WHERE MENU_CODE = #{ code }
+    </delete>
+
+    <update id="updateMenuByCode" parameterType="com.eunah.dto.MenuDTO">
+        UPDATE
+            TBL_MENU
+        SET
+            MENU_NAME = #{name},
+            MENU_PRICE = #{price},
+            CATEGORY_CODE = #{categoryCode},
+            ORDERABLE_STATUS = #{orderableStatus}
+        WHERE MENU_CODE = #{code}
+    </update>
+
 </mapper>

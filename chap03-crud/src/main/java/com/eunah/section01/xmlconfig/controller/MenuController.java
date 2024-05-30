@@ -50,7 +50,7 @@ public class MenuController {
         menu.setPrice(Integer.parseInt(parameter.get("price")));
         menu.setCategoryCode(Integer.parseInt(parameter.get("categoryCode")));
 
-        if (menuService.registMenu(menu)){
+        if (menuService.registMenu(menu)) {
             // 메뉴등록이 성공했을 때
             printResult.printSuccessMessage("insert");
         } else {
@@ -59,5 +59,36 @@ public class MenuController {
         }
 
 
+    }
+
+    public void updateMenuByCode(Map<String, String> parameter) {
+
+        MenuDTO menu = new MenuDTO();
+        menu.setCode(Integer.parseInt(parameter.get("code")));
+        menu.setName(parameter.get("name"));
+        menu.setPrice(Integer.parseInt(parameter.get("price")));
+        menu.setCategoryCode(Integer.parseInt(parameter.get("categoryCode")));
+        menu.setOrderableStatus(parameter.get("orderableStatus"));
+
+        if (menuService.updateMenuByCode(menu)) {
+            printResult.printSuccessMessage("update");
+        } else {
+            printResult.printErrorMessage("update");
+        }
+    }
+
+    // 특정 메뉴 코드를 입력받아 삭제하는 메소드
+    public void deleteMenuByCode(Map<String, String> parameter) {
+        // 매개변수로 받은 코드를 기반으로 메뉴를 삭제
+
+        int code = Integer.parseInt(parameter.get("code"));
+        // 매개변수로 받은 코드를 정수형으로 변환
+
+        // MenuService 를 통해 특정 코드의 메뉴를 삭제
+        if (menuService.deleteMenuByCode(code)) {
+            printResult.printSuccessMessage("delete");
+        } else {
+            printResult.printErrorMessage("delete");
+        }
     }
 }

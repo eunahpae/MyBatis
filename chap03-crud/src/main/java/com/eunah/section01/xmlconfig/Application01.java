@@ -44,6 +44,12 @@ public class Application01 {
                 case 3:
                     menuController.registMenu(inputMenu());
                     break;
+                case 4:
+                    menuController.updateMenuByCode(inputMenuCodeForUpdate());
+                    break;
+                case 5:
+                    menuController.deleteMenuByCode(inputMenuCode());
+                    break;
             }
         } while (true);
     }
@@ -60,7 +66,6 @@ public class Application01 {
         return parameter;
     }
 
-
     public static Map<String,String> inputMenu() {
 
         System.out.println("메뉴 이름을 입력해주세요. : ");
@@ -74,6 +79,32 @@ public class Application01 {
         parameter.put("name", name);
         parameter.put("price", price);
         parameter.put("categoryCode", categoryCode);
+
+        return parameter;
+    }
+
+    private static Map<String, String> inputMenuCodeForUpdate() {
+        System.out.println("변경할 메뉴 코드를 입력하세요: ");
+        String code = sc.nextLine();
+
+        System.out.println("변경할 이름을 입력하세요: ");
+        String name = sc.nextLine();
+
+        System.out.println("변경할 가격을 입력하세요: ");
+        String price = sc.nextLine();
+
+        System.out.println("변경할 카테고리 코드를 입력하세요: ");
+        String categoryCode = sc.nextLine();
+
+        System.out.println("변경할 주문 가능 상태를 입력하세요 (Y/N): ");
+        String orderableStatus = sc.nextLine();
+
+        Map<String, String> parameter = new HashMap<>();
+        parameter.put("code", code);
+        parameter.put("name", name);
+        parameter.put("price", price);
+        parameter.put("categoryCode", categoryCode);
+        parameter.put("orderableStatus", orderableStatus);
 
         return parameter;
     }
