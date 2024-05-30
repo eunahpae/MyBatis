@@ -42,6 +42,8 @@ public class Application01 {
                     menuController.selectMenuByCode(inputMenuCode());
                     break;
                 case 3:
+                    menuController.registMenu(inputMenu());
+                    break;
             }
         } while (true);
     }
@@ -54,6 +56,24 @@ public class Application01 {
 
         Map<String, String> parameter = new HashMap<>();
         parameter.put("code", code);
+
+        return parameter;
+    }
+
+
+    public static Map<String,String> inputMenu() {
+
+        System.out.println("메뉴 이름을 입력해주세요. : ");
+        String name = sc.nextLine();
+        System.out.println("메뉴 가격을 입력해주세요. : ");
+        String price = sc.nextLine();
+        System.out.println("카테고리 코드를 입력해주세요. : ");
+        String categoryCode = sc.nextLine();
+
+        Map<String, String> parameter = new HashMap<>();
+        parameter.put("name", name);
+        parameter.put("price", price);
+        parameter.put("categoryCode", categoryCode);
 
         return parameter;
     }

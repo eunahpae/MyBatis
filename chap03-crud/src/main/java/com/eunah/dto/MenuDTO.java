@@ -5,17 +5,17 @@ public class MenuDTO {
     private int code;
     private String name;
     private int price;
-    private int categoryCOde;
+    private int categoryCode;
     private String orderableStatus;
 
     public MenuDTO() {
     }
 
-    public MenuDTO(int code, String name, int price, int categoryCOde, String orderableStatus) {
+    public MenuDTO(int code, String name, int price, int categoryCode, String orderableStatus) {
         this.code = code;
         this.name = name;
         this.price = price;
-        this.categoryCOde = categoryCOde;
+        this.categoryCode = categoryCode;
         this.orderableStatus = orderableStatus;
     }
 
@@ -43,12 +43,12 @@ public class MenuDTO {
         this.price = price;
     }
 
-    public int getCategoryCOde() {
-        return categoryCOde;
+    public int getCategoryCode() {
+        return categoryCode;
     }
 
-    public void setCategoryCOde(int categoryCOde) {
-        this.categoryCOde = categoryCOde;
+    public void setCategoryCode(int categoryCode) {
+        this.categoryCode = categoryCode;
     }
 
     public String getOrderableStatus() {
@@ -65,7 +65,7 @@ public class MenuDTO {
                 "code=" + code +
                 ", name='" + name + '\'' +
                 ", price=" + price +
-                ", categoryCOde=" + categoryCOde +
+                ", categoryCode=" + categoryCode +
                 ", orderableStatus='" + orderableStatus + '\'' +
                 '}';
     }

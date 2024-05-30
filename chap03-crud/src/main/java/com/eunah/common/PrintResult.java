@@ -23,4 +23,42 @@ public class PrintResult {
         System.out.println(menuDTO);
         // 메뉴를 출력
     }
+
+    public void printSuccessMessage(String code) {
+        String message = null;
+        switch (code) {
+            case "insert":
+                message = "메뉴 등록 성공";
+                break;
+            case "update":
+                message = "메뉴 수정 성공";
+                break;
+            case "delete":
+                message = "메뉴 삭제 성공";
+                break;
+            default:
+                message = "잘못된 처리";
+                break;
+        }
+        System.out.println(message);
+    }
+
+    public void printErrorMessage(String code) {
+        String message = null;
+        switch (code) {
+            case "insert":
+                message = "메뉴 등록 실패";
+                break;
+            case "update":
+                message = "메뉴 수정 실패";
+                break;
+            case "delete":
+                message = "메뉴 삭제 실패";
+                break;
+            default:
+                message = "잘못된 처리";
+                break;
+        }
+        System.out.println(message);
+    }
 }

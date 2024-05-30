@@ -19,4 +19,9 @@ public class MenuDAO {
         return sqlSession.selectOne("MenuMapper.selectMenuByCode", code);
         // MenuMapper.xml 파일에서 "selectMenuByCode" 쿼리를 실행하여 특정 코드의 메뉴를 조회
     }
+
+    //
+    public int insertMenu(SqlSession sqlSession, MenuDTO menu) {
+        return sqlSession.insert("MenuMapper.insertMenu", menu);
+    }
 }

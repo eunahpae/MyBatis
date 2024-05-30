@@ -17,14 +17,16 @@ public class Template {
         // SQL 세션을 반환
 
         if (sqlSessionFactory == null) {
-            // SQL 세션 팩토리가 null인 경우, 새로운 SQL 세션 팩토리를 생성
+            // SQL 세션 팩토리가 null 인 경우, 새로운 SQL 세션 팩토리를 생성
+            // null 인 경우 MyBatis 의 Resources.getResourceAsStream() 메서드를 사용하여
+            // mybatis-config.xml 파일에서 구성을 읽어 sqlSessionFactory 를 초기화
 
             try {
                 // mybatis-config.xml 파일에서 설정을 읽어와 SQL 세션 팩토리를 생성
                 InputStream inputStream = Resources.getResourceAsStream("xmlconfig/mybatis-config.xml");
                 sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
             } catch (IOException e) {
-                // 예외가 발생한 경우, RuntimeException을 던져서 예외를 처리
+                // 예외가 발생한 경우, RuntimeException 을 던져서 예외 처리
                 throw new RuntimeException(e);
             }
         }
