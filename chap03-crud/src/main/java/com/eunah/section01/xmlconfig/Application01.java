@@ -54,7 +54,7 @@ public class Application01 {
         } while (true);
     }
 
-    // 특정 메뉴 코드를 입력받은 내용을 Map<>으로 초기화 반환 (메뉴 조회, 삭제 시 사용)
+    // 입력받은 특정 메뉴 코드를 Map<>으로 초기화 반환 (메뉴 조회, 삭제 시 사용)
     private static Map<String, String> inputMenuCode() {
 
         System.out.println("메뉴 코드를 입력하세요. : ");
@@ -84,7 +84,7 @@ public class Application01 {
         return parameter;
     }
 
-    // 입력받은 코드에 해당하는 값을 추가로 입력받아 Map<>으로 초기화 반환 (메뉴 업데이트 시 사용)
+    // 입력받은 코드에 해당하는 열의 변경하고자 하는 값을 입력받아 Map<>으로 초기화 반환 (메뉴 업데이트 시 사용)
     private static Map<String, String> inputMenuCodeForUpdate() {
         System.out.println("변경할 메뉴 코드를 입력하세요: ");
         String code = sc.nextLine();
