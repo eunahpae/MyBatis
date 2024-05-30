@@ -6,24 +6,23 @@ import java.util.List;
 
 public class PrintResult {
 
-    // 메뉴 목록을 출력하는 메소드
+    // 전체 메뉴를 출력하는 메소드
     public void printMenuList(List<MenuDTO> menuList) {
-        // 주어진 메뉴 목록을 반복하여 각 메뉴를 출력
 
+        // 주어진 메뉴 목록을 반복하여 전체 메뉴를 출력
         for (MenuDTO menu : menuList) {
             System.out.println(menu);
-            // 각 메뉴를 출력
         }
     }
 
-    // 메뉴를 출력하는 메소드
+    // 메뉴 출력 메소드
     public void printMenu(MenuDTO menuDTO) {
-        // 주어진 메뉴를 출력
 
+        // 특정 메뉴 출력
         System.out.println(menuDTO);
-        // 메뉴를 출력
     }
 
+    // 결과메시지 반환 메소드 - 성공
     public void printSuccessMessage(String code) {
         String message = null;
         switch (code) {
@@ -43,6 +42,7 @@ public class PrintResult {
         System.out.println(message);
     }
 
+    // 결과메시지 반환 메소드 - 실패
     public void printErrorMessage(String code) {
         String message = null;
         switch (code) {

@@ -23,7 +23,7 @@ public class MenuController {
         // 모든 메뉴를 조회하고 그 결과를 출력
 
         List<MenuDTO> menuList = menuService.selectAllMenu();
-        // MenuService 를 통해 모든 메뉴를 조회
+        // MenuService 클래스의 selectAllMenu 메소드를 통해 결과를 받아 모든 메뉴를 조회
 
         printResult.printMenuList(menuList);
         // 조회된 메뉴 목록 출력
@@ -50,6 +50,7 @@ public class MenuController {
         menu.setPrice(Integer.parseInt(parameter.get("price")));
         menu.setCategoryCode(Integer.parseInt(parameter.get("categoryCode")));
 
+        // MenuService 클래스의 메소드를 호출하여 반환 결과에 따라 printResult 객체의 메소드에 인자값을 전달, 실행
         if (menuService.registMenu(menu)) {
             // 메뉴등록이 성공했을 때
             printResult.printSuccessMessage("insert");
@@ -57,10 +58,9 @@ public class MenuController {
             // 메뉴등록이 실패했을 때
             printResult.printErrorMessage("insert");
         }
-
-
     }
 
+    // 특정 메뉴 코드를 입력받아 값을 수정하는 메소드
     public void updateMenuByCode(Map<String, String> parameter) {
 
         MenuDTO menu = new MenuDTO();
@@ -79,12 +79,9 @@ public class MenuController {
 
     // 특정 메뉴 코드를 입력받아 삭제하는 메소드
     public void deleteMenuByCode(Map<String, String> parameter) {
-        // 매개변수로 받은 코드를 기반으로 메뉴를 삭제
 
         int code = Integer.parseInt(parameter.get("code"));
-        // 매개변수로 받은 코드를 정수형으로 변환
 
-        // MenuService 를 통해 특정 코드의 메뉴를 삭제
         if (menuService.deleteMenuByCode(code)) {
             printResult.printSuccessMessage("delete");
         } else {

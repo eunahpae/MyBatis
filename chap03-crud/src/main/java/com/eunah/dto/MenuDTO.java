@@ -8,9 +8,11 @@ public class MenuDTO {
     private int categoryCode;
     private String orderableStatus;
 
+    // 기본 생성자
     public MenuDTO() {
     }
 
+    // 모든필드 생성자
     public MenuDTO(int code, String name, int price, int categoryCode, String orderableStatus) {
         this.code = code;
         this.name = name;
@@ -19,6 +21,7 @@ public class MenuDTO {
         this.orderableStatus = orderableStatus;
     }
 
+    // 모든 필드 Getter/Setter
     public int getCode() {
         return code;
     }
@@ -59,6 +62,7 @@ public class MenuDTO {
         this.orderableStatus = orderableStatus;
     }
 
+    // toString()
     @Override
     public String toString() {
         return "MenuDTO{" +

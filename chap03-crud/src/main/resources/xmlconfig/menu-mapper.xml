@@ -2,15 +2,28 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 데이터베이스에서 실행된 쿼리 결과를 Java 객체(com.eunah.dto.MenuDTO)에 매핑하기 위한 resultMap 을 정의 -->
 <mapper namespace="MenuMapper">
     <resultMap id="menuResultMap" type="com.eunah.dto.MenuDTO">
+        <!-- 쿼리 결과의 MENU_CODE 열을 MenuDTO 의 code 속성에 매핑
+        MyBatis에서 <id> 요소는 데이터베이스 테이블의 기본 키에 해당하는 Java 개체의 속성을 지정하는 데 사용된다.
+        테이블의 각 레코드에 대한 고유 식별자를 나타낸다.-->
         <id property="code" column="MENU_CODE"/>
+        <!-- 쿼리 결과의 MENU_NAME 열을 MenuDTO의 name 속성에 매핑 -->
+        <!--쿼리 결과의 일반 열을 Java 개체의 속성에 매핑하는 데 사용되지만 <id>는 기본 키 열용으로 특별히 예약되어 있다.
+        이러한 구별은 MyBatis가 객체를 적절하게 처리하는 방법을 아는 데 중요하며,
+        특히 수정 또는 제거할 레코드를 식별하는 데 기본 키가 중요한 업데이트 및 삭제와 같은 작업의 경우 더욱 그렇다.-->
         <result property="name" column="MENU_NAME"/>
+        <!-- 쿼리 결과의 MENU_PRICE 열을 MenuDTO의 price 속성에 매핑 -->
         <result property="price" column="MENU_PRICE"/>
+        <!-- 쿼리 결과의 CATEGORY_CODE 열을 MenuDTO의 categoryCode 속성에 매핑 -->
         <result property="categoryCode" column="CATEGORY_CODE"/>
+        <!-- 쿼리 결과의 ORDERABLE_STATUS 열을 MenuDTO의 orderableStatus 속성에 매핑 -->
         <result property="orderableStatus" column="ORDERABLE_STATUS"/>
     </resultMap>
 
+    <!-- 쿼리 작성 -->
     <select id="selectAllMenu" resultMap="menuResultMap">
         SELECT
             MENU_CODE,
@@ -57,11 +70,11 @@
         UPDATE
             TBL_MENU
         SET
-            MENU_NAME = #{name},
-            MENU_PRICE = #{price},
-            CATEGORY_CODE = #{categoryCode},
-            ORDERABLE_STATUS = #{orderableStatus}
-        WHERE MENU_CODE = #{code}
+            MENU_NAME = #{ name },
+            MENU_PRICE = #{ price },
+            CATEGORY_CODE = #{ categoryCode },
+            ORDERABLE_STATUS = #{ orderableStatus }
+        WHERE MENU_CODE = #{ code }
     </update>
 
 </mapper>

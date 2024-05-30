@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class Application01 {
 
+    // 전역에서 사용할 수 있도록 정적필드(static)로 초기화
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -33,7 +34,6 @@ public class Application01 {
             int no = sc.nextInt();
             sc.nextLine();
 
-
             switch (no) {
                 case 1:
                     menuController.selectAllMenu();
@@ -54,7 +54,7 @@ public class Application01 {
         } while (true);
     }
 
-    // 특정 메뉴 코드를 입력받아 해당 메뉴 조회 & 삭제시 사용 메소드
+    // 특정 메뉴 코드를 입력받은 내용을 Map<>으로 초기화 반환 (메뉴 조회, 삭제 시 사용)
     private static Map<String, String> inputMenuCode() {
 
         System.out.println("메뉴 코드를 입력하세요. : ");
@@ -66,7 +66,7 @@ public class Application01 {
         return parameter;
     }
 
-    // 메뉴 삽입시 사용 메소드
+    // 입력받은 내용을 Map<>으로 초기화 반환 (메뉴 삽입 시 사용)
     public static Map<String, String> inputMenu() {
 
         System.out.println("메뉴 이름을 입력해주세요. : ");
@@ -84,7 +84,7 @@ public class Application01 {
         return parameter;
     }
 
-    // 메뉴 업데이트시 사용 메소드
+    // 입력받은 코드에 해당하는 값을 추가로 입력받아 Map<>으로 초기화 반환 (메뉴 업데이트 시 사용)
     private static Map<String, String> inputMenuCodeForUpdate() {
         System.out.println("변경할 메뉴 코드를 입력하세요: ");
         String code = sc.nextLine();
