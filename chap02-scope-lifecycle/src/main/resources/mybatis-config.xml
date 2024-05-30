@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- XML 문서의 버전과 인코딩을 지정 -->
+
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- MyBatis 설정 파일의 DTD 를 지정하여 XML 파일의 구조를 검증할 수 있게 함 -->
+
+<configuration>
+    <!-- MyBatis 설정의 루트 엘리먼트 -->
+    <environments default="development">
+        <!-- 여러 환경 설정을 정의하는 엘리먼트. 기본 환경으로 'development' 를 지정 -->
+        <environment id="development">
+            <!-- 환경의 ID를 'development' 로 지정 -->
+            <transactionManager type="JDBC"/>
+            <!-- 트랜잭션 매니저의 유형을 JDBC 로 설정. JDBC 트랜잭션 매니저는 데이터베이스 커넥션을 직접 관리 -->
+            <dataSource type="POOLED">
+                <!-- 데이터 소스의 유형을 POOLED 로 설정. POOLED 유형은 커넥션 풀링을 사용 -->
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <!-- JDBC 드라이버 클래스를 지정. MySQL의 최신 드라이버를 사용 -->
+                <property name="url" value="jdbc:mysql://localhost:3306/menudb"/>
+                <!-- 데이터베이스 URL 을 지정. 이 예제에서는 로컬호스트의 menudb 데이터베이스를 사용 -->
+                <property name="username" value="songpa"/>
+                <!-- 데이터베이스 접속에 사용할 사용자 이름을 지정. -->
+                <property name="password" value="songpa"/>
+                <!-- 데이터베이스 접속에 사용할 비밀번호를 지정. -->
+            </dataSource>
+        </environment>
+    </environments>
+</configuration>
+        <!-- MyBatis 설정 파일의 끝 표시 -->
