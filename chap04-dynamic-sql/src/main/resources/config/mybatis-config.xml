@@ -3,6 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <!-- typeAliases : MyBatis 설정 파일의 일부로, typeAliases 태그를 사용하여 클래스에 별칭을 부여하고 있다.
+    이를 통해 XML 매퍼 파일에서 클래스 이름(경로)을 더 간결하고 읽기 쉽게 사용할 수 있다.-->
     <typeAliases>
         <typeAlias type="com.eunah.common.SearchCriteria" alias="SearchCrireria"/>
     </typeAliases>

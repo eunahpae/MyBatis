@@ -11,32 +11,6 @@
         <result property="orderableStatus" column="ORDERABLE_STATUS"/>
     </resultMap>
 
-    <select id="selectMenuByPrice" parameterType="hashmap" resultMap="menuResultMap">
-        SELECT
-        A.MENU_CODE,
-        A.MENU_NAME,
-        A.MENU_PRICE,
-        A.CATEGORY_CODE,
-        A.ORDERABLE_STATUS
-        FROM TBL_MENU A
-        WHERE A.ORDERABLE_STATUS = 'Y'
-        <if test="price gte 0 and price lte 10000"> <!-- gte, lte 등은 이미 태그 부호로 <,> 등을 사용하고 있기 때문에 사용 불가, 문자로 대체 표현한 것 -->
-            <!-- CDATA : Character Data(문자 데이터)의 약자 -->
-            <![CDATA[
-            AND A.MENU_PRICE < #{ price }
-            ]]>
-        </if>
-        <if test="price gt 10000 and price lte 20000">
-            AND A.MENU_PRICE BETWEEN 10000 AND #{ price }
-        </if>
-        <if test="price gt 20000 and price lte 30000">
-            AND A.MENU_PRICE BETWEEN 20000 AND #{ price }
-        </if>
-        <if test="price gt 30000">
-            AND A.MENU_PRICE BETWEEN 30000 AND #{ price }
-        </if>
-    </select>
-
     <select id="searchMenu" parameterType="SearchCrireria" resultMap="menuResultMap">
         SELECT
         A.MENU_CODE,
@@ -46,7 +20,7 @@
         A.ORDERABLE_STATUS
         FROM TBL_MENU A
         <if test="condition == 'category'">
-        JOIN TBL_CATEGORY B ON (A.CATEGORY_CODE = B.CATEGORY_CODE)
+            JOIN TBL_CATEGORY B ON (A.CATEGORY_CODE = B.CATEGORY_CODE)
         </if>
         WHERE A.ORDERABLE_STATUS = 'Y'
         <if test="condition == 'name'">
@@ -56,9 +30,44 @@
             AND B.CATEGORY_NAME = #{ value }
         </if>
     </select>
+
+    <select id="selectMenuByPrice" parameterType="hashmap" resultMap="menuResultMap">
+        SELECT
+        A.MENU_CODE,
+        A.MENU_NAME,
+        A.MENU_PRICE,
+        A.CATEGORY_CODE,
+        A.ORDERABLE_STATUS
+        FROM TBL_MENU A
+        WHERE A.ORDERABLE_STATUS = 'Y'
+
+        <!-- 가격이 0 이상 10000 이하인 경우 -->
+        <if test="price gte 0 and price lte 10000">
+            <!-- CDATA : Character Data(문자 데이터)의 약자  -->
+            <!-- CDATA 섹션 : <![CDATA[ ... ]]> 사이에 있는 모든 텍스트를 문자 데이터로 취급한다.
+            이 섹션 내에서는 &, <, > 등의 특수 문자를 사용해도 파싱 오류가 발생하지 않는다.
+            gt는 greater than(>)의 약자이고, gte는 greater than or equal to(>=)의 약자이다. (반대(little) - lt, lte)
+            XML에서 < 와 >를 직접 사용할 수 없기 때문에 이렇게 문자로 대체하여 사용한다. -->
+            <![CDATA[
+            AND A.MENU_PRICE < #{ price }
+            ]]>
+        </if>
+        <!-- 가격이 10000 초과 20000 이하인 경우 -->
+        <if test="price gt 10000 and price lte 20000">
+            AND A.MENU_PRICE BETWEEN 10000 AND #{ price }
+        </if>
+        <!-- 가격이 20000 초과 30000 이하인 경우 -->
+        <if test="price gt 20000 and price lte 30000">
+            AND A.MENU_PRICE BETWEEN 20000 AND #{ price }
+        </if>
+        <!-- 가격이 30000 초과 -->
+        <if test="price gt 30000">
+            AND A.MENU_PRICE BETWEEN 30000 AND #{ price }
+        </if>
+    </select>
 </mapper>
 
-<!-- Dynamic SQL Mapper 는 MyBatis 와 같은 SQL 매퍼 프레임워크에서 사용되는 개념으로,
-런타임 시점에 동적으로 SQL 쿼리를 생성할 수 있는 기능을 제공한다.
-이 기능은 특히 조건문, 반복문, 변수 대입 등을 사용하여 유연한 쿼리 생성을 가능하게 한다.
-이를 통해 코드의 재사용성과 유지보수성을 높일 수 있다. -->
+        <!-- Dynamic SQL Mapper 는 MyBatis 와 같은 SQL 매퍼 프레임워크에서 사용되는 개념으로,
+        런타임 시점에 동적으로 SQL 쿼리를 생성할 수 있는 기능을 제공한다.
+        이 기능은 특히 조건문, 반복문, 변수 대입 등을 사용하여 유연한 쿼리 생성을 가능하게 한다.
+        이를 통해 코드의 재사용성과 유지보수성을 높일 수 있다. -->
