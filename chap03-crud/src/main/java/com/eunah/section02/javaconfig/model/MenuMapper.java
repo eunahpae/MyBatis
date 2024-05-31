@@ -49,4 +49,18 @@ public interface MenuMapper {
             "#{ categoryCode }," +
             "'Y')")
     int registMenu(MenuDTO menu);
+
+    @Update("UPDATE TBL_MENU " +
+            "SET " +
+            "MENU_NAME = #{name}, " +
+            "MENU_PRICE = #{price}, " +
+            "CATEGORY_CODE = #{categoryCode}, " +
+            "ORDERABLE_STATUS = #{orderableStatus} " +
+            "WHERE MENU_CODE = #{code}")
+    int updateMenuByCode(MenuDTO menu);
+
+
+    @Delete("DELETE FROM TBL_MENU " +
+            "WHERE MENU_CODE = #{ code }")
+    int deleteMenuByCode(int code);
 }

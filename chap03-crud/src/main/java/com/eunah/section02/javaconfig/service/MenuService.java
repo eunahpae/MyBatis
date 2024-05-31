@@ -44,6 +44,36 @@ public class MenuService {
         }
         sqlSession.close();
         return result > 0 ? true : false;
+    }
 
+
+    public boolean updateMenuByCode(MenuDTO menu) {
+        SqlSession sqlSession = getJavaSqlSession();
+        menuMapper = sqlSession.getMapper(MenuMapper.class);
+        int result = menuMapper.updateMenuByCode(menu);
+
+        if (result > 0) {
+            sqlSession.commit();
+        } else {
+            sqlSession.rollback();
+        }
+        sqlSession.close();
+        return result > 0 ? true : false;
+
+    }
+
+    public boolean deleteMenuByCode(int code) {
+        SqlSession sqlSession = getJavaSqlSession();
+        menuMapper = sqlSession.getMapper(MenuMapper.class);
+
+        int result = menuMapper.deleteMenuByCode(code);
+
+        if (result > 0) {
+            sqlSession.commit();
+        } else {
+            sqlSession.rollback();
+        }
+        sqlSession.close();
+        return result > 0 ? true : false;
     }
 }

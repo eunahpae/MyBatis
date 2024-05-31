@@ -16,6 +16,8 @@ public class Application01 {
 
         do {
             System.out.println("============ 메뉴 관리 시스템");
+
+
             System.out.println("1. 메뉴 전체 조회");
             System.out.println("2. 메뉴 코드로 메뉴 조회");
             System.out.println("3. 신규 메뉴 추가");
@@ -44,11 +46,7 @@ public class Application01 {
                 default:
                     System.out.println("잘못된 번호를 선택 하셨습니다. "); break;
             }
-
         } while (true);
-
-
-
     }
 
 
