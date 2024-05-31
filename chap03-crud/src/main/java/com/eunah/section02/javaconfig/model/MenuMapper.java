@@ -38,7 +38,6 @@ public interface MenuMapper {
     MenuDTO selectMenuByCode(int code);
 
 
-    @ResultMap("menuResultMap")
     @Insert("INSERT INTO TBL_MENU(" +
             "MENU_NAME," +
             "MENU_PRICE," +
