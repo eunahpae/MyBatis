@@ -61,11 +61,6 @@
         )
     </insert>
 
-    <delete id="deleteMenuByCode" parameterType="int">
-        DELETE FROM TBL_MENU
-        WHERE MENU_CODE = #{ code }
-    </delete>
-
     <update id="updateMenuByCode" parameterType="com.eunah.dto.MenuDTO">
         UPDATE
             TBL_MENU
@@ -76,5 +71,10 @@
             ORDERABLE_STATUS = #{ orderableStatus }
         WHERE MENU_CODE = #{ code }
     </update>
+
+    <delete id="deleteMenuByCode" parameterType="int">
+        DELETE FROM TBL_MENU
+        WHERE MENU_CODE = #{ code }
+    </delete>
 
 </mapper>

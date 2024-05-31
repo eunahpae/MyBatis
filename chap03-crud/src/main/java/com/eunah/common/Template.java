@@ -70,4 +70,37 @@ public class Template {
         }
         return sqlSessionFactory.openSession(false);
     }
+
+    public static SqlSession getRemixSqlSession() {
+        if (sqlSessionFactory == null) {
+            Properties properties = new Properties();
+            try {
+                properties.load(new FileReader("src/main/resources/javaconfig/javaconfig.properties"));
+                String driver = properties.getProperty("Driver");
+                String url = properties.getProperty("url");
+                String user = properties.getProperty("user");
+                String password = properties.getProperty("password");
+
+                Environment environment = new Environment(
+                        "dev",
+                        new JdbcTransactionFactory(),
+                        new PooledDataSource(driver, url, user, password)
+                );
+
+                Configuration configuration = new Configuration(environment);
+                configuration.addMapper(com.eunah.section03.remix.model.MenuMapper.class);
+
+                sqlSessionFactory = new SqlSessionFactoryBuilder().build(configuration);
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return sqlSessionFactory.openSession(false);
+    }
+
+
 }
+
+
+
