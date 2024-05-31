@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 
 /*
-* 흐름 정리
+* 흐름 정리)
 *
 * 1. Application(Front) 에서 사용자의 입력을 받는다.
 * 2. MenuController 에서 사용자의 요청을 받아, MenuService 에게 실행 요청을 한다.
@@ -17,9 +17,6 @@ import java.util.Scanner;
 * 5. 반환받은 값으로 PrintResult 클래스의 메소드를 실행하여 사용자에게 결과값을 출력해준다.
 *
 */
-
-
-
 
 public class Application01 {
 
