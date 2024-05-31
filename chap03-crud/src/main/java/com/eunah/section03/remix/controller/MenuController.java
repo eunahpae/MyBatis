@@ -9,7 +9,6 @@ import java.util.Map;
 
 public class MenuController {
 
-
     private final PrintResult printResult;
     private final MenuService menuService;
 
