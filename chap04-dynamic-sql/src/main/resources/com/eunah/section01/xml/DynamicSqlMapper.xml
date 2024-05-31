@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eunah.section01.xml.DynamicSqlMapper">
+    <resultMap id="menuResultMap" type="com.eunah.common.MenuDTO">
+        <id property="code" column="MENU_CODE"/>
+        <result property="name" column="MENU_NAME"/>
+        <result property="price" column="MENU_PRICE"/>
+        <result property="categoryCode" column="CATEGORY_CODE"/>
+        <result property="orderableStatus" column="ORDERABLE_STATUS"/>
+    </resultMap>
+
+    <select id="selectMenuByPrice" parameterType="hashmap" resultMap="menuResultMap">
+        SELECT
+        A.MENU_CODE,
+        A.MENU_NAME,
+        A.MENU_PRICE,
+        A.CATEGORY_CODE,
+        A.ORDERABLE_STATUS
+        FROM TBL_MENU A
+        WHERE A.ORDERABLE_STATUS = 'Y'
+        <if test="price gte 0 and price lte 10000"> <!-- gte, lte 등은 이미 태그 부호로 <,> 등을 사용하고 있기 때문에 사용 불가, 문자로 대체 표현한 것 -->
+            <!-- CDATA : Character Data(문자 데이터)의 약자 -->
+            <![CDATA[
+            AND A.MENU_PRICE < #{ price }
+            ]]>
+        </if>
+        <if test="price gt 10000 and price lte 20000">
+            AND A.MENU_PRICE BETWEEN 10000 AND #{ price }
+        </if>
+        <if test="price gt 20000 and price lte 30000">
+            AND A.MENU_PRICE BETWEEN 20000 AND #{ price }
+        </if>
+        <if test="price gt 30000">
+            AND A.MENU_PRICE BETWEEN 30000 AND #{ price }
+        </if>
+    </select>
+
+    <select id="searchMenu" parameterType="SearchCrireria" resultMap="menuResultMap">
+        SELECT
+        A.MENU_CODE,
+        A.MENU_NAME,
+        A.MENU_PRICE,
+        A.CATEGORY_CODE,
+        A.ORDERABLE_STATUS
+        FROM TBL_MENU A
+        <if test="condition == 'category'">
+        JOIN TBL_CATEGORY B ON (A.CATEGORY_CODE = B.CATEGORY_CODE)
+        </if>
+        WHERE A.ORDERABLE_STATUS = 'Y'
+        <if test="condition == 'name'">
+            AND A.MENU_NAME LIKE CONCAT('%', #{ value }, '%')
+        </if>
+        <if test="condition == 'category'">
+            AND B.CATEGORY_NAME = #{ value }
+        </if>
+    </select>
+</mapper>
+
+<!-- Dynamic SQL Mapper 는 MyBatis 와 같은 SQL 매퍼 프레임워크에서 사용되는 개념으로,
+런타임 시점에 동적으로 SQL 쿼리를 생성할 수 있는 기능을 제공한다.
+이 기능은 특히 조건문, 반복문, 변수 대입 등을 사용하여 유연한 쿼리 생성을 가능하게 한다.
+이를 통해 코드의 재사용성과 유지보수성을 높일 수 있다. -->
