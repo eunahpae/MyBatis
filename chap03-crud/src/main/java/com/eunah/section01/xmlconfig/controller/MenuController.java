@@ -13,7 +13,7 @@ public class MenuController {
     private final MenuService menuService; // 메뉴 관련 로직을 처리하는 MenuService 객체
 
     public MenuController() {
-        // PrintResult 및 MenuService 객체를 생성하여 초기화
+        // PrintResult 및 MenuService 객체 생성
         this.printResult = new PrintResult();
         this.menuService = new MenuService();
     }

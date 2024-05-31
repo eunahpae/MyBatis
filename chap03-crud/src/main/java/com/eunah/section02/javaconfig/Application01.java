@@ -1,6 +1,6 @@
-package com.eunah.section01.xmlconfig;
+package com.eunah.section02.javaconfig;
 
-import com.eunah.section01.xmlconfig.controller.MenuController;
+import com.eunah.section02.javaconfig.controller.MenuController;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,18 +8,9 @@ import java.util.Scanner;
 
 public class Application01 {
 
-    // 전역에서 사용할 수 있도록 정적필드(static)로 초기화
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-
-        /*
-         * CRUD 3가지 방식 연습
-         *
-         * 1. xml 방식
-         * 2. java 방식
-         * 3. 혼합 방식
-         */
 
         MenuController menuController = new MenuController();
 
@@ -50,28 +41,27 @@ public class Application01 {
                 case 5:
                     menuController.deleteMenuByCode(inputMenuCode());
                     break;
+                default:
+                    System.out.println("잘못된 번호를 선택 하셨습니다. "); break;
             }
+
         } while (true);
+
+
+
     }
 
-    // 특정 메뉴 코드를 입력받은 내용을 Map<>으로 초기화 반환 (메뉴 조회, 삭제 시 사용)
+
     private static Map<String, String> inputMenuCode() {
-
-        System.out.println("메뉴 코드를 입력하세요. : ");
+        System.out.println("메뉴 코드를 입력해주세요. : ");
         String code = sc.nextLine();
-
-        // HashMap 은 키-값 쌍으로 데이터를 저장하는 자료구조.
-        // "code" 키에는 입력받은 코드가 저장된다.
-        // 이렇게 하면 각 데이터를 고유한 키를 통해 쉽게 접근할 수 있다.
         Map<String, String> parameter = new HashMap<>();
         parameter.put("code", code);
 
         return parameter;
     }
 
-    // 입력받은 내용을 Map<>으로 초기화 반환 (메뉴 삽입 시 사용)
-    public static Map<String, String> inputMenu() {
-
+    private static Map<String, String> inputMenu() {
         System.out.println("메뉴 이름을 입력해주세요. : ");
         String name = sc.nextLine();
         System.out.println("메뉴 가격을 입력해주세요. : ");
@@ -87,7 +77,6 @@ public class Application01 {
         return parameter;
     }
 
-    // 입력받은 코드에 해당하는 값을 추가로 입력받아 Map<>으로 초기화 반환 (메뉴 업데이트 시 사용)
     private static Map<String, String> inputMenuCodeForUpdate() {
         System.out.println("변경할 메뉴 코드를 입력하세요: ");
         String code = sc.nextLine();

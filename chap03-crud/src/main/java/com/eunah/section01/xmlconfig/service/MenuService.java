@@ -13,7 +13,7 @@ public class MenuService {
     private final MenuDAO menuDAO; // MenuDAO 객체를 저장하는 멤버 변수
 
     public MenuService() {
-        // 데이터베이스에 접근하기 위한 객체 MenuDAO 를 생성하여 초기화
+        // 데이터베이스에 접근하기 위한 객체 MenuDAO 를 생성
         this.menuDAO = new MenuDAO();
     }
 
