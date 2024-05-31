@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-
 /*
 * 흐름 정리)
 *
@@ -15,7 +14,6 @@ import java.util.Scanner;
 * 3. MenuService 는 MenuMapper(DB) 를 통해 요청한 결과값을 전달받는다.
 * 4. MenuService 에서의 결과값을 호출위치인 MenuController 로 다시 반환한다.
 * 5. 반환받은 값으로 PrintResult 클래스의 메소드를 실행하여 사용자에게 결과값을 출력해준다.
-*
 */
 
 public class Application01 {
@@ -23,7 +21,7 @@ public class Application01 {
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-
+        
         MenuController menuController = new MenuController();
 
         do {
