@@ -16,12 +16,20 @@ import java.util.Scanner;
 * 5. 반환받은 값으로 PrintResult 클래스의 메소드를 실행하여 사용자에게 결과값을 출력해준다.
 */
 
+/*
+* MyBatis 의 XML+Java 혼합 방법을 사용하면 SQL 과 Java 로직을 깔끔하게 분리할 수 있다.
+* SQL 문은 XML 파일로 resources 디렉토리에 정의되어 관리 및 업데이트가 쉽다.
+* Java 인터페이스 또는 클래스는 이러한 SQL 문을 메소드에 매핑하는 데 사용되어 데이터베이스와 상호 작용한다.
+* 이 접근 방식은 특히 복잡한 애플리케이션에서 코드베이스의 가독성을 향상시켜 유지보수에 유리하다.
+*/
+
+
 public class Application01 {
 
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-        
+
         MenuController menuController = new MenuController();
 
         do {
