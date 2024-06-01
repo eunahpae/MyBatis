@@ -110,17 +110,115 @@
     </resultMap>
 
     <select id="selectResultMapAssociationTest" resultMap="menuAndCategoryResultMap">
-        SELECT
-            A.MENU_CODE,
-            A.MENU_NAME,
-            A.MENU_PRICE,
-            B.CATEGORY_CODE,
-            B.CATEGORY_NAME,
-            B.REF_CATEGORY_CODE,
-            A.ORDERABLE_STATUS
+        SELECT A.MENU_CODE,
+               A.MENU_NAME,
+               A.MENU_PRICE,
+               B.CATEGORY_CODE,
+               B.CATEGORY_NAME,
+               B.REF_CATEGORY_CODE,
+               A.ORDERABLE_STATUS
         FROM TBL_MENU A
-        JOIN TBL_CATEGORY B ON (A.CATEGORY_CODE = B.CATEGORY_CODE)
+                 JOIN TBL_CATEGORY B ON (A.CATEGORY_CODE = B.CATEGORY_CODE)
         WHERE ORDERABLE_STATUS = 'Y'
     </select>
+
+    <resultMap id="CategoryAndMenuResultMap" type="com.eunah.common.CategoryAndMenuDTO">
+        <id property="code" column="CATEGORY_CODE"/>
+        <result property="name" column="CATEGORY_NAME"/>
+        <result property="refCategoryCode" column="REF_CATEGORY_CODE"/>
+        <collection property="menuList" ofType="com.eunah.common.MenuDTO">
+            <id property="code" column="MENU_CODE"/>
+            <result property="name" column="MENU_NAME"/>
+            <result property="price" column="MENU_PRICE"/>
+            <result property="categoryCode" column="CATEGORY_CODE"/>
+            <result property="orderableStatus" column="ORDERABLE_STATUS"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectResultMapCollectionTest" resultMap="CategoryAndMenuResultMap">
+        SELECT A.CATEGORY_CODE,
+               A.CATEGORY_NAME,
+               A.REF_CATEGORY_CODE,
+               B.MENU_CODE,
+               B.MENU_NAME,
+               B.MENU_PRICE,
+               B.CATEGORY_CODE,
+               B.ORDERABLE_STATUS
+        FROM TBL_CATEGORY A
+                 LEFT JOIN TBL_MENU B ON (A.CATEGORY_CODE = B.CATEGORY_CODE)
+    </select>
+
+
+    <!-- 필기 3. <sql> 앨리먼트
+            각 매핑 구문에서 공통으로 사용할 수 있는 SQL 문자열의 일부를 정의하고 재사용하기 위해 사용한다. -->
+    <sql id="columns">
+        MENU_CODE
+        , MENU_NAME
+      , MENU_PRICE
+      , CATEGORY_CODE
+      , ORDERABLE_STATUS
+    </sql>
+
+    <select id="selectSqlTest" resultMap="menuResultMap2">
+        SELECT
+        <include refid="columns"/>
+        /*위의 쿼리문을 불러다가 씀.안쓰는게 나음 - 유지보수가 힘들어짐*/
+        FROM TBL_MENU A
+        WHERE A.ORDERABLE_STATUS = 'Y'
+    </select>
+
+
+    <!--  <insert> 앨리먼트 -->
+    <!--  insert, update, delete 엘리먼트는 사용하는 속성이 대부분 동일하지만 insert 엘리먼트는 좀 더 많은 속성을 정의할 수 있다.
+            =============================================================================================================
+            < 공통 속성 >
+             - id : 매핑 구문을 구분하는 id이다.
+             - parameterType : 파라미터의 타입을 지정한다. 이미 정의된 별칭을 사용하거나, 클래스의 full-name을 사용한다.
+             - flushCache : 매핑 구문을 실행할 때 캐시 삭제 여부를 설정한다.
+             - timeout : sql을 실행한 후 응답을 기다리는 최대 시간이다. 보통은 설정하지 않고 JDBC 드라이버 자체의 타임아웃 값을 그대로 사용한다.
+             - statementType : JDBC 구문 타입을 지정한다. STATEMENT, PREPARED, CALLABLE 중 하나를 쓸 수 있으며 기본값은 PREPARED이다.
+            =============================================================================================================
+            < insert 추가 속성 >
+             - useGenerateKeys : 생성 키 값을 만들기 위해 JDBC의 getGenerateKeys메소드를 호출할지 결정하며 기본값은 false이다.
+             - keyProperty : insert 구문의 하위 엘리먼트인 selectKey 엘리먼트에 의한 반환값을 설정할 프로퍼티를 지정한다.
+             - keyColumn : 생성 키를 가진 테이블의 컬럼명을 설정한다. (키 컬럼이 테이블의 첫 번째 행이 아닌 데이터베이스에서만 필요하다 - PostgreSQL 제외)  -->
+
+    <insert id="insertMenuTest" parameterType="com.eunah.common.MenuDTO">
+        INSERT INTO TBL_MENU (MENU_NAME,
+                              MENU_PRICE,
+                              CATEGORY_CODE,
+                              ORDERABLE_STATUS)
+        VALUES (#{name},
+                #{price},
+                #{categoryCode},
+                #{orderableStatus})
+    </insert>
+
+    <insert id="insertNewCategory">
+        INSERT INTO TBL_CATEGORY(
+            CATEGORY_NAME
+        )VALUES (
+                    #{ category.name }
+                )
+    </insert>
+
+    <insert id="insertNewMenu">
+        <selectKey keyProperty="category.code" order="BEFORE" resultType="_int">
+            SELECT AUTO_INCREMENT -1
+            FROM INFORMATION_SCHEMA.TABLES
+            WHERE TABLE_SCHEMA = 'menudb'
+            AND TABLE_NAME = 'tbl_category'
+        </selectKey>
+        INSERT INTO TBL_MENU (
+        MENU_NAME,
+        MENU_PRICE,
+        CATEGORY_CODE,
+        ORDERABLE_STATUS
+        )VALUES(
+        #{ name },
+        #{ price },
+        #{ category.code },
+        #{orderableStatus})
+    </insert>
 
 </mapper>

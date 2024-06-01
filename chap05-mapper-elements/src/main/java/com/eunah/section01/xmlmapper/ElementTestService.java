@@ -80,4 +80,40 @@ public class ElementTestService {
         }
         sqlSession.close();
     }
+
+    public void insertMenuTest(MenuDTO menuDTO) {
+        SqlSession sqlSession = Template.getSqlSession();
+        mapper = sqlSession.getMapper(ElementTestMapper.class);
+
+        int result = mapper.insertMenuTest(menuDTO);
+        if (result > 0) {
+            System.out.println("메뉴 등록 성공");
+            sqlSession.commit();
+        } else {
+            System.out.println("메뉴 등록 실패");
+            sqlSession.rollback();
+        }
+        sqlSession.close();
+
+    }
+
+    public void insertCategoryAndMenuTest(MenuAndCategoryDTO menuAndCategoryDTO) {
+
+        SqlSession sqlSession = Template.getSqlSession();
+        mapper = sqlSession.getMapper(ElementTestMapper.class);
+
+        int result1 = mapper.insertNewCategory(menuAndCategoryDTO);
+        int result2 = mapper.insertNewMenu(menuAndCategoryDTO);
+
+
+        if (result1 > 0 && result2 > 0) {
+            System.out.println("신규 카테고리와 메뉴 등록 성공");
+            sqlSession.commit();
+        } else {
+            System.out.println("신규 카테고리와 메뉴 등록 실패");
+            sqlSession.rollback();
+        }
+        sqlSession.close();
+
+    }
 }

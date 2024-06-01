@@ -6,16 +6,16 @@ public class CategoryAndMenuDTO {
 
     private int code;
     private String name;
-    private int refCategory;
+    private int refCategoryCode;
     private List<MenuDTO> menuList;
 
     public CategoryAndMenuDTO() {
     }
 
-    public CategoryAndMenuDTO(int code, String name, int refCategory, List<MenuDTO> menuList) {
+    public CategoryAndMenuDTO(int code, String name, int refCategoryCode, List<MenuDTO> menuList) {
         this.code = code;
         this.name = name;
-        this.refCategory = refCategory;
+        this.refCategoryCode = refCategoryCode;
         this.menuList = menuList;
     }
 
@@ -35,12 +35,12 @@ public class CategoryAndMenuDTO {
         this.name = name;
     }
 
-    public int getRefCategory() {
-        return refCategory;
+    public int getRefCategoryCode() {
+        return refCategoryCode;
     }
 
-    public void setRefCategory(int refCategory) {
-        this.refCategory = refCategory;
+    public void setRefCategoryCode(int refCategoryCode) {
+        this.refCategoryCode = refCategoryCode;
     }
 
     public List<MenuDTO> getMenuList() {
@@ -56,7 +56,7 @@ public class CategoryAndMenuDTO {
         return "CategoryAndMenuDTO{" +
                 "code=" + code +
                 ", name='" + name + '\'' +
-                ", refCategory=" + refCategory +
+                ", refCategoryCode=" + refCategoryCode +
                 ", menuList=" + menuList +
                 '}';
     }
