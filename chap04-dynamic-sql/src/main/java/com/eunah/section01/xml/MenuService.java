@@ -119,4 +119,20 @@ public class MenuService {
         }
         sqlSession.close();
     }
+
+    public void modifyMenu(Map<String, Object> stringObjectMap) {
+        SqlSession sqlSession = getSqlSession();
+        mapper = sqlSession.getMapper(DynamicSqlMapper.class);
+
+        int result = mapper.modifyMenu(stringObjectMap);
+
+        if (result > 0) {
+            System.out.println("수정 성공");
+            sqlSession.commit();
+        } else {
+            System.out.println("수정 실패");
+            sqlSession.rollback();
+        }
+        sqlSession.close();
+    }
 }

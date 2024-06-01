@@ -175,6 +175,23 @@
     </select>
 
 
+    <update id="modifyMenu" parameterType="hashMap">
+        UPDATE TBL_MENU
+        <trim prefix="SET" prefixOverrides=",">
+            <if test="name != null">
+                MENU_NAME = #{ name }
+            </if>
+            <if test="categoryCode != null">
+                ,CATEGORY_CODE = #{ categoryCode }
+            </if>
+            <if test="orderableStatus != null">
+                , ORDERABLE_STATUS = #{ orderableStatus }
+            </if>
+        </trim>
+        WHERE MENU_CODE = #{ code }
+    </update>
+
+
 </mapper>
 
         <!-- Dynamic SQL Mapper 는 MyBatis 와 같은 SQL 매퍼 프레임워크에서 사용되는 개념으로,

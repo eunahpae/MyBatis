@@ -48,7 +48,6 @@ public class Application01 {
             System.out.println("========= if 메뉴 =========");
             System.out.println("1. 원하는 금액대의 적합한 추천 메뉴 목록 보여주기");
             System.out.println("2. 메뉴이름 혹은 카테고리 명으로 검색하여 메뉴 목록 보여주기");
-            System.out.println("3. ");
             System.out.println("9. 이전 메뉴로");
             System.out.println("메뉴 번호를 입력 해주세요 : ");
             int no = scr.nextInt();
@@ -145,6 +144,7 @@ public class Application01 {
         Collections.sort(list);
         return list;
     }
+
     private static void trimSubMenu() {
         Scanner scr = new Scanner(System.in);
         MenuService menuService = new MenuService();
@@ -162,28 +162,31 @@ public class Application01 {
                     menuService.searchMenuByCodeOrSearchAll(inputAllOrOne());
                 case 2:
                     menuService.searchMenuByNameOrCategory(inputSearchChriteriaMap());
+                case 3:
+                    menuService.modifyMenu(inputChangeInfo());
+                    break;
             }
 
         } while (true);
     }
 
-    private static Map<String,Object> inputSearchChriteriaMap() {
+    private static Map<String, Object> inputSearchChriteriaMap() {
         Scanner scr = new Scanner(System.in);
         System.out.println("검색할 조건을 입력 해주세요 (category, name, both) : ");
         String condition = scr.nextLine();
 
-        Map<String,Object> criteria = new HashMap<>();
+        Map<String, Object> criteria = new HashMap<>();
         if (condition.equals("category")) {
             System.out.println("검색할 카테고리 코드를 입력해주세요 : ");
             int categoryValue = scr.nextInt();
             criteria.put("categoryValue", categoryValue);
 
-        }else if (condition.equals("name")) {
+        } else if (condition.equals("name")) {
             System.out.println("검색할 이름를 입력해주세요 : ");
             String nameValue = scr.nextLine();
             criteria.put("nameValue", nameValue);
 
-        }else if (condition.equals("both")) {
+        } else if (condition.equals("both")) {
             System.out.println("검색할 이름를 입력해주세요 : ");
             String nameValue = scr.nextLine();
             System.out.println("검색할 카테고리 코드를 입력해주세요 : ");
@@ -208,5 +211,25 @@ public class Application01 {
             searchCriteria.setValue(code);
         }
         return searchCriteria;
+    }
+
+    private static Map<String, Object> inputChangeInfo() {
+        Scanner scr = new Scanner(System.in);
+        System.out.println("변경할 메뉴 코드로 입력 해주세요 : ");
+        int code = scr.nextInt();
+        System.out.println("변경할 메뉴 이름을 입력 해주세요 : ");
+        String name = scr.nextLine();
+        scr.nextLine();
+        System.out.println("변경할 카테고리 코드를 입력 해주세요 : ");
+        String categoryCode = scr.nextLine();
+        System.out.println("판매 여부를 결정 해주세요 : ");
+        String orderableStatus = scr.nextLine();
+
+        Map<String, Object> criteria = new HashMap<>();
+        criteria.put("code", code);
+        criteria.put("name", name);
+        criteria.put("categoryCode", categoryCode);
+        criteria.put("orderableStatus", orderableStatus);
+        return criteria;
     }
 }
