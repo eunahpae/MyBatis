@@ -14,7 +14,6 @@ MyBatis는 SQL을 별도의 파일로 분리해서 관리하고, 객체-SQL 사�
 MyBatis는 개발자가 익숙한 SQL을 그대로 이용하면서 JDBC 코드 작성의 불편함도 제거하여 도메인 객체나 VO 객체를 중심으로 개발이 가능하다는 장점이 있다.
 
 * Domain Object (도메인 객체) - 개발하고자 하는 영역을 분석하고, 그 분석의 결과로 도출된 객체들을 의미
-
 * Value Object (VO 객체) - DTO의 읽기 버전 (VO는 출력 : Read Only)
 
 ### MyBatis(마이바티스) 특징 2 
@@ -25,12 +24,17 @@ MyBatis는 개발자가 익숙한 SQL을 그대로 이용하면서 JDBC 코드 �
 3.  다양한 프로그래밍 언어로 구현이 가능하다 - Java, C#, .NET, Ruby
  
 
- #### MyBatis를 사용하는 Data Access Layer
+ #### MyBatis를 사용하여 CRUD 하는 방법 3가지
+
+ 1. XML
+ 2. Java
+ 3. XML+Java 혼합
 
 MyBatis에서 CRUD 방법 중 XML+Java 혼합 방법 : 제일 많이 사용됨
 SQL 매핑을 위한 XML 파일의 사용과 DAO(Data Access Object) 인터페이스 또는 클래스를 위한 Java를 결합한다. 이 접근 방식을 사용하면 XML 파일에서 SQL 쿼리를 정의하고 이를 Java 메서드에 매핑하여 SQL 코드와 Java 코드를 명확하게 구분할 수 있다.
 
-MyBatis의 가장 큰 장점 : 동적 쿼리
+#### MyBatis의 가장 큰 장점 : 동적 쿼리
+
 Dynamic SQL Mapper는 MyBatis와 같은 SQL 매퍼 프레임워크에서 사용되는 개념으로, 런타임 시점에 동적으로 SQL 쿼리를 생성할 수 있는 기능을 제공한다. 이 기능은 특히 조건문, 반복문, 변수 대입 등을 사용하여 유연한 쿼리 생성을 가능하게 한다. 이를 통해 코드의 재사용성과 유지보수성을 높일 수 있다.
  
 
