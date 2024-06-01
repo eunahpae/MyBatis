@@ -30,7 +30,7 @@ MyBatis는 개발자가 익숙한 SQL을 그대로 이용하면서 JDBC 코드 �
  2. Java
  3. XML+Java 혼합
 
-MyBatis에서 CRUD 방법 중 XML+Java 혼합 방법 : 제일 많이 사용됨
+MyBatis에서 CRUD 방법 중 XML+Java 혼합 방법이 제일 많이 사용된다.
 SQL 매핑을 위한 XML 파일의 사용과 DAO(Data Access Object) 인터페이스 또는 클래스를 위한 Java를 결합한다. 이 접근 방식을 사용하면 XML 파일에서 SQL 쿼리를 정의하고 이를 Java 메서드에 매핑하여 SQL 코드와 Java 코드를 명확하게 구분할 수 있다.
 
 #### MyBatis의 가장 큰 장점 : 동적 쿼리
